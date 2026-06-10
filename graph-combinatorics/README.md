@@ -24,3 +24,16 @@ By initiating the search directly at $x = \lfloor\sqrt{n}\rfloor + 1$ and iterat
 ## Production Safety & Mitigations
 * **Floating-Point Degradation Avoided:** Standard `math.sqrt` truncates precision at 15-17 digits, generating catastrophic negative value square root crashes on 64-bit bounds. This implementation exclusively leverages pure integer-arithmetic (`math.isqrt`) for absolute precision.
 * **Even Number Guard:** Implements a sub-nanosecond bitwise filter (`n & 1`) to intercept even inputs before entering number-theoretic square loops.
+
+
+# High-Precision Fermat Factorization Engine
+
+## Problem Statement
+Standard $O(\sqrt{n})$ trial division algorithms cause Time Limit Exceeded (TLE) errors on 64-bit integer payloads ($10^{18}$) within low-latency production environments.
+
+## Solution Architecture
+This engine utilizes Fermat's difference of squares identity ($n = x^2 - y^2$) to achieve sub-linear execution time when factors are close to $\sqrt{n}$.
+
+### Key Optimizations:
+1. **Precision Guard:** Replaced floating-point operations with `math.isqrt` to eliminate 64-bit decimal truncation errors.
+2. **Circuit Breaker Pattern:** Integrated an iteration budget (`max_iterations`) to prevent infinite loop execution and CPU throttling when processing non-adjacent factors or primes.
