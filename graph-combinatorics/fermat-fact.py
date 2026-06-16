@@ -23,3 +23,11 @@ def fermat_fact(n, max_iterations=1000):
         x = x + 1
 result = fermat_fact(1000000000000000003, max_iterations=10000)
 print(f"Result: {result}")
+
+# n = n^2 - y^2,
+# 1. Starting boundary for x,
+# 2. Search Loop,
+# 3. Difference of y^2 = x^2 - n,
+# 4. Verify if y is a clean whole number,
+# 5. If not a perfect square shift up,
+# 6. Example outcome.
