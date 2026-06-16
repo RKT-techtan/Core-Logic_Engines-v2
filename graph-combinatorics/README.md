@@ -5,7 +5,7 @@ Traditional prime factorization via trial division takes $O(\sqrt{n})$ time per 
 
 ## The Engineering Solution
 This repository implements a **Pre-computed Smallest Prime Factor (SPF)** lookup array using a modified Sieve of Eratosthenes. 
-* **Boot Time Cost:** $O(N \log \log N)$ time to build the static array map.
+>>> Boot Time Cost:** $O(N \log \log N)$ time to build the static array map.
 * **Query Time Performance:** Pure $O(\log n)$ logarithmic runtime to factorize any incoming number.
 * **Trade-off Analysis:** We willingly sacrifice $O(N)$ space in RAM at boot time to guarantee ultra-low latency microsecond responses for active users during runtime.
 
@@ -37,3 +37,15 @@ This engine utilizes Fermat's difference of squares identity ($n = x^2 - y^2$) t
 ### Key Optimizations:
 1. **Precision Guard:** Replaced floating-point operations with `math.isqrt` to eliminate 64-bit decimal truncation errors.
 2. **Circuit Breaker Pattern:** Integrated an iteration budget (`max_iterations`) to prevent infinite loop execution and CPU throttling when processing non-adjacent factors or primes.
+
+
+## 6/16/2026 ####### FERMAT FACTORIZATION
+HIGH-PRECISION FERMAT FACTORIZATION ENGINE
+
+>>> The system architecture
+This engine replaces slow, linear division loops with a sub-linear geometric search based on fermats difference of squares identity:
+$n = x^2 - y^2 = (x - y)(x + y)$
+
+>>> Structural blue print
+1. Precision Boundary: Uses integer-only arithmetic (`math.isqrt`) to stop 64-bit precision loss.
+2. Circuit Breaker: Implements a strict iteration cap to prevent server freezes (TLE) when factors are spaced far apart.
