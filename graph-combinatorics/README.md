@@ -44,8 +44,17 @@ HIGH-PRECISION FERMAT FACTORIZATION ENGINE
 
 >>> The system architecture
 This engine replaces slow, linear division loops with a sub-linear geometric search based on fermats difference of squares identity:
-$n = x^2 - y^2 = (x - y)(x + y)$
+ *n = x^2 - y^2 = (x - y)(x + y)$*
 
 >>> Structural blue print
 1. Precision Boundary: Uses integer-only arithmetic (`math.isqrt`) to stop 64-bit precision loss.
 2. Circuit Breaker: Implements a strict iteration cap to prevent server freezes (TLE) when factors are spaced far apart.
+
+
+## 6/22/2026 ###### PHOLLARDS ALGORITHM FACTOR
+>>> Pollard's Rho Factorization Pipeline
+
+1. *Complexity*: $O(n^{1/4})$ sub-linear execution time.
+2. *Optimization*: Features a fast primality entry-gate filter to optimize CPU usage and prevent dead-end loop cycles.
+
+*pho_algo_v.py, v2.py, and v3.py*
