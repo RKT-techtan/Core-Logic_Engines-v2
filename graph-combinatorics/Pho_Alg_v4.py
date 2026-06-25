@@ -11,13 +11,13 @@ def is_prime_fast(n):
     return True
 
 def enterprise_factorizer(n):
-    print(f"{n}")
+    print(f"{n}") # Free to add print output comment.
     
     if is_prime_fast(n):
         print(f"{n}")
         return n, 1
         
-    print("Done!!")
+    print("Done!!") # Free to add print output comment.
     
     def f(val, n):
         return (val**2 + 1) % n
